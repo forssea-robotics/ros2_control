@@ -151,16 +151,16 @@ public:
 
     EXPECT_EQ(
       lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED,
-      pid_left_wheel_controller->get_state().id());
+      pid_left_wheel_controller->get_state_id());
     EXPECT_EQ(
       lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED,
-      pid_right_wheel_controller->get_state().id());
+      pid_right_wheel_controller->get_state_id());
     EXPECT_EQ(
       lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED,
-      diff_drive_controller->get_state().id());
+      diff_drive_controller->get_state_id());
     EXPECT_EQ(
       lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED,
-      position_tracking_controller->get_state().id());
+      position_tracking_controller->get_state_id());
   }
 
   // order or controller configuration is not important therefore we can reuse the same method
@@ -172,7 +172,7 @@ public:
     // configure chainable controller and check exported interfaces
     cm_->configure_controller(PID_LEFT_WHEEL);
     EXPECT_EQ(
-      pid_left_wheel_controller->get_state().id(),
+      pid_left_wheel_controller->get_state_id(),
       lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE);
     EXPECT_EQ(cm_->resource_manager_->command_interface_keys().size(), number_of_cmd_itfs + 1);
     for (const auto & interface : {"pid_left_wheel_controller/velocity"})
@@ -184,7 +184,7 @@ public:
 
     cm_->configure_controller(PID_RIGHT_WHEEL);
     EXPECT_EQ(
-      pid_right_wheel_controller->get_state().id(),
+      pid_right_wheel_controller->get_state_id(),
       lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE);
     EXPECT_EQ(cm_->resource_manager_->command_interface_keys().size(), number_of_cmd_itfs + 2);
     for (const auto & interface : {"pid_right_wheel_controller/velocity"})
@@ -196,7 +196,7 @@ public:
 
     cm_->configure_controller(DIFF_DRIVE_CONTROLLER);
     EXPECT_EQ(
-      diff_drive_controller->get_state().id(), lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE);
+      diff_drive_controller->get_state_id(), lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE);
     EXPECT_EQ(cm_->resource_manager_->command_interface_keys().size(), number_of_cmd_itfs + 5);
     for (const auto & interface :
          {"diff_drive_controller/vel_x", "diff_drive_controller/vel_y",
@@ -209,7 +209,7 @@ public:
 
     cm_->configure_controller(POSITION_TRACKING_CONTROLLER);
     EXPECT_EQ(
-      position_tracking_controller->get_state().id(),
+      position_tracking_controller->get_state_id(),
       lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE);
     EXPECT_EQ(cm_->resource_manager_->command_interface_keys().size(), number_of_cmd_itfs + 5);
   }

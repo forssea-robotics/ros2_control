@@ -15,7 +15,9 @@
 #ifndef CONTROLLER_INTERFACE__CONTROLLER_INTERFACE_BASE_HPP_
 #define CONTROLLER_INTERFACE__CONTROLLER_INTERFACE_BASE_HPP_
 
+#include <cstdint>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -151,6 +153,29 @@ public:
 
   CONTROLLER_INTERFACE_PUBLIC
   const rclcpp_lifecycle::State & get_state() const;
+
+  const std::string get_state_label() const {
+    while(true && rclcpp::ok())
+    {
+      try {
+        return get_state().label();
+      } catch(std::runtime_error &e){
+        fprintf(stderr, "Exception thrown during ControllerInterfaceBase::get_state_label: %s \n", e.what());
+      }
+    }
+
+  }
+
+  uint8_t get_state_id() const {
+    while(true && rclcpp::ok())
+    {
+      try {
+        return get_state().id();
+      } catch(std::runtime_error &e){
+        fprintf(stderr, "Exception thrown during ControllerInterfaceBase::get_state_id: %s \n", e.what());
+      }
+    }
+  }
 
   CONTROLLER_INTERFACE_PUBLIC
   unsigned int get_update_rate() const;
