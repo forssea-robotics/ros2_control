@@ -149,7 +149,7 @@ ControllerManager::ControllerManager(
     std::make_shared<pluginlib::ClassLoader<controller_interface::ChainableControllerInterface>>(
       kControllerInterfaceNamespace, kChainableControllerInterfaceClassName))
 {
-  RCLCPP_ERROR(get_logger(), "Using Forssea fork of controller_manager.");
+  RCLCPP_WARN(get_logger(), "Using Forssea fork of controller_manager.");
   if (!get_parameter("update_rate", update_rate_))
   {
     RCLCPP_WARN(get_logger(), "'update_rate' parameter not set, using default value.");
@@ -180,7 +180,7 @@ ControllerManager::ControllerManager(
     std::make_shared<pluginlib::ClassLoader<controller_interface::ChainableControllerInterface>>(
       kControllerInterfaceNamespace, kChainableControllerInterfaceClassName))
 {
-  RCLCPP_ERROR(get_logger(), "Using Forssea fork of controller_manager.");
+  RCLCPP_WARN(get_logger(), "Using Forssea fork of controller_manager.");
   if (!get_parameter("update_rate", update_rate_))
   {
     RCLCPP_WARN(get_logger(), "'update_rate' parameter not set, using default value.");
